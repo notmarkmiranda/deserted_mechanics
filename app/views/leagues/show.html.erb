@@ -1,6 +1,7 @@
 <div>
   <% if policy(@league).edit? %>
     <%= link_to "Edit League", edit_league_path %>
+    <%= button_to "Delete League", league_path(@league), method: :delete%>
   <% end %>
 </div>
 <h1><%= @league.name %></h1>

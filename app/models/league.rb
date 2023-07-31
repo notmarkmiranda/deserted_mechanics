@@ -1,6 +1,8 @@
 class League < ApplicationRecord
   acts_as_paranoid
 
+  validates :name, uniqueness: true, presence: true
+
   has_many :memberships
   has_many :users, through: :memberships do
     def members
@@ -12,5 +14,4 @@ class League < ApplicationRecord
     end
   end
 
-  validates :name, uniqueness: true, presence: true
 end

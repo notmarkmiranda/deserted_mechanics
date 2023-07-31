@@ -1,4 +1,5 @@
 require "./lib/league_creator"
+require "./lib/league_destroyer"
 
 class LeaguesController < ApplicationController
   def show
@@ -39,6 +40,10 @@ class LeaguesController < ApplicationController
   end
 
   def destroy
+    @league = League.includes(:memberships).find(params[:id])
+    authorize @league
+    LeagueDestroyer.destroy(@league, current_user.id)
+    redirect_to dashboard_path
   end
 
   private
