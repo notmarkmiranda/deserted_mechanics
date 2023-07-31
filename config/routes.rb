@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post "/sign-up",   to: "users#create"
   get  "/dashboard", to: "users#show",       as: "dashboard"
 
-  resources :leagues, only: [:new, :create, :show, :update, :destroy]
+  resources :leagues, only: [:new, :create, :show, :edit, :update, :destroy]
 end

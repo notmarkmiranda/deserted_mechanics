@@ -3,6 +3,7 @@ require "./lib/league_creator"
 class LeaguesController < ApplicationController
   def show
     @league = League.find(params[:id])
+    authorize @league
   end
 
   def new
@@ -20,7 +21,21 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def edit
+    @league = League.find(params[:id])
+    authorize @league
+  end
+
   def update
+    @league = League.find(params[:id])
+    authorize @league
+    if @league.update(league_params)
+      flash[:notice] = "League updated!"
+      redirect_to @league
+    else
+      flash[:alert] = @league.errors.full_messages.join(", ")
+      render :edit
+    end
   end
 
   def destroy
