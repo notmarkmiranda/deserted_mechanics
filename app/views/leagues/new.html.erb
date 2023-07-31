@@ -1,0 +1,16 @@
+<%= form_with model: @league do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div>
+    <%= f.label :private_league %>
+    <%= f.check_box :private_league %>
+  </div>
+  <%= f.submit "Save League" %>
+
+<% end %>
