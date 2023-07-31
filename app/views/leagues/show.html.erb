@@ -1,5 +1,8 @@
 <div>
-  <%= link_to "Edit League", edit_league_path %>
+  <% if policy(@league).edit? %>
+    <%= link_to "Edit League", edit_league_path %>
+  <% end %>
 </div>
 <h1><%= @league.name %></h1>
 <small><%= @league.location %></small>
+
