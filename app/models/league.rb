@@ -13,5 +13,13 @@ class League < ApplicationRecord
       where("memberships.role = ?", 1)
     end
   end
+  has_many :seasons, dependent: :destroy
 
+  after_commit :create_initial_season
+
+  private
+
+  def create_initial_season
+    seasons.create(active: true)
+  end
 end
