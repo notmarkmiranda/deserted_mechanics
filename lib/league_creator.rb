@@ -10,8 +10,8 @@ class LeagueCreator
   end
 
   def save
-    league = create_league
-    membership = create_membership
+    @league = create_league
+    @membership = create_membership
     return true if errors.empty?
     false
   end

@@ -13,7 +13,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "redis", "~> 4.0"
 gem "bcrypt", "~> 3.1.7"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false
 gem "pundit"
 gem "paranoia", "~> 2.6"
@@ -23,6 +23,7 @@ group :development, :test do
   gem "faker"
   gem "pry"
   gem "rspec-rails", "~> 6.0.0"
+  gem "standard-rails"
 end
 
 group :development do

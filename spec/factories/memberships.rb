@@ -4,7 +4,7 @@ FactoryBot.define do
     user
 
     trait :member do
-        role { 0 }
+      role { 0 }
     end
 
     trait :admin do
