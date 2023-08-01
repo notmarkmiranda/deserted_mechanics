@@ -15,6 +15,8 @@ class League < ApplicationRecord
   end
   has_many :seasons, dependent: :destroy
 
+  delegate :count, to: :seasons, prefix: true
+
   after_commit :create_initial_season
 
   private
