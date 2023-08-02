@@ -2,28 +2,18 @@
 
 class LeaguePolicy < ApplicationPolicy
   def show?
-    record.private_league? ? user_is_member? : true
+    record.private_league? ? user_is_member?(record) : true
   end
 
   def edit?
-    user_is_admin?
+    user_is_admin?(record)
   end
 
   def update?
-    user_is_admin?
+    user_is_admin?(record)
   end
 
   def destroy?
-    user_is_admin?
-  end
-
-  private
-
-  def user_is_member?
-    record.users.include?(user)
-  end
-
-  def user_is_admin?
-    record.users.admin.include?(user)
+    user_is_admin?(record)
   end
 end

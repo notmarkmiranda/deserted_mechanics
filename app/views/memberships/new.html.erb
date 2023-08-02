@@ -1,0 +1,31 @@
+<h2>Invite a new player to <%= link_to @league.name, league_path(@league) %></h2>
+
+<%= form_with model: @membership, url: league_memberships_path do |f| %>
+  <%= f.fields_for :user, User.new do |ff| %>
+    <div>
+      <%= ff.label :email, "Email (optional)" %>
+      <%= ff.text_field :email %>
+    </div>
+    <div>
+      <%= ff.label :first_name %>
+      <%= ff.text_field :first_name %>
+    </div>
+    <div>
+      <%= ff.label :last_name %>
+      <%= ff.text_field :last_name %>
+    </div>
+    <div>
+      <%= label_tag do %>
+        <%= check_box_tag :notify %>
+        Notify user (requires email address)
+      <% end %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :role do%>
+      <%= f.check_box :role, checked: @membership.role == 1 %>
+      Admin
+    <% end %>
+  </div>
+  <%= f.submit "Invite User" %>
+<% end %>

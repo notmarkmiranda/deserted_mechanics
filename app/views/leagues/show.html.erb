@@ -2,8 +2,12 @@
   <% if policy(@league).edit? %>
     <%= link_to "Edit League", edit_league_path %>
     <%= button_to "Delete League", league_path(@league), method: :delete%>
+    <%= link_to "Invite new player", new_league_membership_path(@league) %>
   <% end %>
 </div>
 <h1><%= @league.name %></h1>
 <div>Location: <%= @league.location %></div>
 <div>Seasons count: <%= @league.seasons_count %></div>
+<div>
+  <%= link_to "Members: #{@league.memberships_count}", league_memberships_path(@league) %>
+</div>

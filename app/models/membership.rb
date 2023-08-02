@@ -3,4 +3,5 @@ class Membership < ApplicationRecord
 
   belongs_to :league
   belongs_to :user
+  accepts_nested_attributes_for :user
 end
