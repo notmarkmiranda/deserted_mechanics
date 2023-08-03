@@ -1,5 +1,5 @@
 class Membership < ApplicationRecord
-  acts_as_paranoid
+  acts_as_paranoid column: :deactivated_at
 
   belongs_to :league
   belongs_to :user

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "users#show", as: "dashboard"
 
   resources :leagues, only: [:new, :create, :show, :edit, :update, :destroy] do
-    resources :memberships, only: [:index, :new, :create, :edit, :update]
+    resources :memberships, only: [:index, :new, :create, :edit, :update, :destroy]
+    patch "/membership/:id/reactivate/", to: "memberships#reactivate", as: "membership_reactivate"
   end
 end

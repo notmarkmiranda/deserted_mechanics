@@ -3,12 +3,15 @@
   <%= link_to "Invite new member", new_league_membership_path(@league) %>
 </div>
 <div>
+  <h2>Admin</h2>
   <ul>
-    <% @memberships.each do |membership| %>
-      <li>
-        <%= membership.user_full_name %> - <%= membership.role_string %>
-        <%= link_to "Edit", edit_league_membership_path(@league, membership) %>
-      </li>
-    <% end %>
+    <%= render partial: "membership_link", collection: @memberships[1], as: :membership %>
+  </ul>
+</div>
+
+<div>
+  <h2>Members</h2>
+  <ul>
+    <%= render partial: "membership_link", collection: @memberships[0], as: :membership %>
   </ul>
 </div>

@@ -2,7 +2,7 @@ class MembershipsController < ApplicationController
   before_action :load_league
 
   def index
-    @memberships = @league.memberships.includes(:user).decorate
+    @memberships = @league.memberships.with_deleted.includes(:user).decorate.group_by(&:role)
   end
 
   def new
@@ -37,6 +37,20 @@ class MembershipsController < ApplicationController
       flash[:alert] = @membership.errors.full_messages.join(", ")
       render :edit
     end
+  end
+
+  def destroy
+    @membership = Membership.find(params[:id])
+    authorize @membership
+    @membership.destroy
+    redirect_to league_memberships_path(@league)
+  end
+
+  def reactivate
+    @membership = Membership.with_deleted.find(params[:id])
+    authorize @membership
+    @membership.restore
+    redirect_to league_memberships_path(@league)
   end
 
   private
