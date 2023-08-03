@@ -36,6 +36,14 @@ class ApplicationPolicy
     false
   end
 
+  def user_is_member?(league)
+    league.users.include?(user)
+  end
+
+  def user_is_admin?(league)
+    league.users.admin.include?(user)
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

@@ -1,0 +1,9 @@
+<h2>Edit Membership for <%= @membership.user_full_name %></h2>
+
+<%= form_with model: @membership, url: league_membership_path(@league, @membership) do |f| %>
+  <%= f.label :role do %>
+    <%= f.check_box :role, checked: @membership.role == 1 %>
+    Admin
+  <% end %>
+  <%= f.submit %>
+<% end %>

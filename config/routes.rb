@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   get "/sign-up", to: "users#new", as: "sign_up"
   post "/sign-up", to: "users#create"
   get "/dashboard", to: "users#show", as: "dashboard"
+  get "/invite/:token", to: "users#reset", as: "membership_invite"
+  get "/reset/:token", to: "users#reset", as: "reset_password"
 
-  resources :leagues, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :users, only: [:update]
+
+  resources :leagues, only: [:new, :create, :show, :edit, :update, :destroy] do
+    resources :memberships, only: [:index, :new, :create, :edit, :update, :destroy]
+    patch "/membership/:id/reactivate/", to: "memberships#reactivate", as: "membership_reactivate"
+  end
 end

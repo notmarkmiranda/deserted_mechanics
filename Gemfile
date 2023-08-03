@@ -17,6 +17,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false
 gem "pundit"
 gem "paranoia", "~> 2.6"
+gem "draper"
 
 group :development, :test do
   gem "factory_bot_rails"
@@ -27,6 +28,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener"
   gem "web-console"
 end
 

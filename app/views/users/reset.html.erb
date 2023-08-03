@@ -1,0 +1,14 @@
+<h2>Set your password</h2>
+
+<div>
+  <%= form_with model: @user do |f| %>
+    <p>Email Address: <%= @user.email %></p>
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.submit "Set Password" %>
+    </div>
+  <% end %>
+</div>

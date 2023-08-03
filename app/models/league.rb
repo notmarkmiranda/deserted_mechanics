@@ -3,7 +3,15 @@ class League < ApplicationRecord
 
   validates :name, uniqueness: true, presence: true
 
-  has_many :memberships
+  has_many :memberships do
+    def members
+      where("memberships.role = ?", 0)
+    end
+
+    def admin
+      where("memberships.role = ?", 1)
+    end
+  end
   has_many :users, through: :memberships do
     def members
       where("memberships.role = ?", 0)
@@ -16,6 +24,7 @@ class League < ApplicationRecord
   has_many :seasons, dependent: :destroy
 
   delegate :count, to: :seasons, prefix: true
+  delegate :count, to: :memberships, prefix: true
 
   after_commit :create_initial_season
 
