@@ -1,0 +1,11 @@
+<li>
+  <%= membership.status_string %><%= membership.user_full_name %> - <%= membership.role_string %>
+  <% if policy(membership).destroy? %>
+    <% if membership.deactivated_at?%>
+      <%= button_to "Reactivate", league_membership_reactivate_path(@league, membership), method: :patch %>
+    <% else %>
+      <%= link_to "Edit", edit_league_membership_path(@league, membership) %>
+      <%= button_to "Deactivate", league_membership_path(@league, membership), method: :delete %>
+    <% end %>
+  <% end %>
+</li>

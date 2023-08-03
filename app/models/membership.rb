@@ -4,4 +4,6 @@ class Membership < ApplicationRecord
   belongs_to :league
   belongs_to :user
   accepts_nested_attributes_for :user
+
+  delegate :email, to: :user, prefix: true
 end
