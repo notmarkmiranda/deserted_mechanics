@@ -15,7 +15,7 @@ class MembershipsController < ApplicationController
     authorize @membership
     set_user_password
     if @membership.save
-      UserMailer.welcome(@membership.user_email).deliver_now if @membership.user_email && params[:notify]
+      UserMailer.welcome(@membership).deliver_now if @membership.user_email && params[:notify]
       flash[:notice] = "User invited!"
       redirect_to @league
     else
