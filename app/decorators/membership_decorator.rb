@@ -6,7 +6,7 @@ class MembershipDecorator < ApplicationDecorator
   end
 
   def role_string
-    role == 0 ? "Member" : "Admin"
+    (role == 0) ? "Member" : "Admin"
   end
 
   def status_string
