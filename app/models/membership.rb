@@ -6,4 +6,8 @@ class Membership < ApplicationRecord
   accepts_nested_attributes_for :user
 
   delegate :email, to: :user, prefix: true
+
+  def user_has_no_email?
+    user.email.blank?
+  end
 end

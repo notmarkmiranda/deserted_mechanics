@@ -1,0 +1,17 @@
+<h1>Assign Email Address for <%= @user.full_name %></h1>
+
+<%= form_with model: @user, url: set_email_path do |f| %>
+  <%= hidden_field_tag :return_to, @return_to %>
+  <%= hidden_field_tag :membership_id, params[:membership_id] %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= label_tag do %>
+      <%= check_box_tag :notify %>
+      Notify user
+    <% end %>
+  </div>
+  <%= f.submit %>
+<% end %>
