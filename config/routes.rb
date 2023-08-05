@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  # Sessions
+  # sessions
   get "/sign-in", to: "sessions#new", as: "sign_in"
   post "/sign-in", to: "sessions#create"
   post "/sign-out", to: "sessions#destroy", as: "sign_out"
 
-  # Users
+  # users
   get "/sign-up", to: "users#new", as: "sign_up"
   post "/sign-up", to: "users#create"
   get "/dashboard", to: "users#show", as: "dashboard"
@@ -21,7 +21,14 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
 
   resources :leagues, only: [:new, :create, :show, :edit, :update, :destroy] do
+    # league::memberships
     resources :memberships, only: [:index, :new, :create, :edit, :update, :destroy]
     patch "/membership/:id/reactivate/", to: "memberships#reactivate", as: "membership_reactivate"
+
+    # league::games
+    resources :games, only: [:new, :create]
   end
+
+  # games
+  resources :games, only: [:show]
 end

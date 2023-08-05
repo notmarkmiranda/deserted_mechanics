@@ -22,15 +22,19 @@ class League < ApplicationRecord
     end
   end
   has_many :seasons, dependent: :destroy
+  has_many :season_games, through: :seasons, source: :games
+  has_many :games, dependent: :destroy
 
   delegate :count, to: :seasons, prefix: true
   delegate :count, to: :memberships, prefix: true
 
-  after_commit :create_initial_season
+  after_commit :create_active_season
 
-  private
+  def active_season
+    seasons.find_by(active: true)
+  end
 
-  def create_initial_season
+  def create_active_season
     seasons.create(active: true)
   end
 end
