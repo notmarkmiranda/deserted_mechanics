@@ -26,7 +26,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       session[:user_id] = @user.id
-      flash[:notice] = "Password set"
       redirect_to dashboard_path
     else
       flash[:alert] = "Something went wrong"
@@ -45,7 +44,29 @@ class UsersController < ApplicationController
     redirect_to reset_sent_path
   end
 
+  def assign_email
+    @user = User.find(params[:id]).decorate
+    @return_to = URI(request.referrer).path || dashboard_path
+    authorize @user
+  end
+
+  def set_email
+    @user = User.find(params[:id])
+    authorize @user
+    @user.update(user_params)
+    if params[:notify]
+      membership = Membership.find(params[:membership_id])
+      UserMailer.welcome(membership).deliver_now
+    end
+    flash[:notice] = "Email set for #{@user.decorate.full_name}"
+    redirect_to params[:return_to] || dashboard_path
+  end
+
   private
+
+  def impersonating?
+    params[:impersonating] == "true"
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

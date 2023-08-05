@@ -2,7 +2,7 @@ class MembershipDecorator < ApplicationDecorator
   delegate_all
 
   def user_full_name
-    user.first_name ? "#{user.first_name} #{user.last_name}" : user.email
+    user.decorate.full_name
   end
 
   def role_string
