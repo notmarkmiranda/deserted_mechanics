@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user, only: [:show]
+  before_action :redirect_user, only: [:new, :create, :reset]
 
   def show
     @leagues = current_user.leagues
@@ -39,6 +40,11 @@ class UsersController < ApplicationController
     redirect_to sign_up_path unless @user
   end
 
+  def send_reset
+    UserMailer.forgot_password(params[:email]).deliver_now
+    redirect_to reset_sent_path
+  end
+
   private
 
   def user_params
@@ -47,5 +53,6 @@ class UsersController < ApplicationController
 
   def request_path
     return "membership_invite" if request.original_fullpath.starts_with?("/invite/")
+    return "reset" if request.original_fullpath.starts_with?("/reset/")
   end
 end

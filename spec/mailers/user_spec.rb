@@ -15,5 +15,4 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to include("Hey friend")
     end
   end
-
 end
