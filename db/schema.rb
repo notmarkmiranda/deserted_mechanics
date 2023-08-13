@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_05_200852) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_05_203615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.bigint "season_id", null: false
+    t.bigint "season_id"
     t.datetime "date"
     t.boolean "completed", default: false
     t.integer "buy_in"
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_200852) do
     t.jsonb "payout_schedule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "league_id"
+    t.index ["league_id"], name: "index_games_on_league_id"
     t.index ["season_id"], name: "index_games_on_season_id"
   end
 
@@ -51,8 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_200852) do
   create_table "seasons", force: :cascade do |t|
     t.bigint "league_id", null: false
     t.boolean "active"
-    t.boolean "completed", default: false
-    t.boolean "overall_standings", default: true
+    t.boolean "completed", default: false, null: false
+    t.boolean "overall_standings", default: true, null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_200852) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "games", "leagues"
   add_foreign_key "games", "seasons"
   add_foreign_key "memberships", "leagues"
   add_foreign_key "memberships", "users"

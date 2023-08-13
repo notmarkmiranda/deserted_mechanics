@@ -3,7 +3,7 @@ require "./lib/league_destroyer"
 
 class LeaguesController < ApplicationController
   def show
-    @league = League.includes(:seasons, memberships: :user).find(params[:id])
+    @league = League.includes(:seasons, memberships: :user, seasons: :games).find(params[:id])
     authorize @league
   end
 

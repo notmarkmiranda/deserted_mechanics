@@ -6,6 +6,6 @@ FactoryBot.define do
     buy_in { 100 }
     location { Faker::Address.city }
     estimated_player_count { 6 }
-    payout_schedule { { 1 => 50, 2 => 30, 3 => 20 } }
+    payout_schedule { {1 => 50, 2 => 30, 3 => 20} }
   end
 end

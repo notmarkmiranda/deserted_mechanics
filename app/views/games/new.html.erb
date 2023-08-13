@@ -1,0 +1,28 @@
+<h2>Schedule a Game</h2>
+
+<%= form_with model: @game, url: league_games_path(@league) do |f| %>
+  <div>
+    <%= label_tag do %>
+      <%= check_box_tag :active_season %>
+      Schedule game in active season?
+    <% end %>
+    <p>(If there is no active season, one will be created)</p>
+  </div>
+  <div>
+    <%= f.label :date %>
+    <%= f.datetime_field :date %>
+  </div>
+  <div>
+    <%= f.label :buy_in %>
+    <%= f.number_field :buy_in %>
+  </div>
+  <div>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div>
+    <%= f.label :estimated_player_count %>
+    <%= f.number_field :estimated_player_count %>
+  </div>
+  <%= f.submit "Schedule Game" %>
+<% end %>
