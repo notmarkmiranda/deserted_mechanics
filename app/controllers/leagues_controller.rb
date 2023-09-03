@@ -17,7 +17,7 @@ class LeaguesController < ApplicationController
       flash[:notice] = "League created!"
       redirect_to league_creator.league
     else
-      flash[:alert] = @league.errors.full_messages
+      flash[:alert] = league_creator.errors.join(", ")
       render :new
     end
   end
