@@ -7,6 +7,9 @@
   <% unless current_page?(sign_in_path) %>
     <%= link_to "Sign In", sign_in_path %>
   <% end %>
+  <% unless current_page?(sign_up_path) %>
+    <%= link_to "Sign Up", sign_up_path %>
+  <% end %>
 <% end %>
 
 <hr />
