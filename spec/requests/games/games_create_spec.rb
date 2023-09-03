@@ -6,6 +6,8 @@ RSpec.describe "Create game", type: :request do
   let(:admin) { create(:membership, :admin, league: league).user }
   let(:game_attributes) { attributes_for(:game) }
 
+  before { login(admin) }
+  
   describe "POST /leagues/:league_id/games" do
     it "creates a game for an active season" do
       expect do

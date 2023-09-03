@@ -7,8 +7,8 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new
-    # authorize @game
+    @game = @league.games.new
+    authorize @game
   end
 
   def create
@@ -18,7 +18,7 @@ class GamesController < ApplicationController
     else
       @league.games.new(game_params)
     end
-    # authorize @game
+    authorize @game
     if @game.save
       flash[:notice] = "Game scheduled"
       redirect_to game_path(@game)
