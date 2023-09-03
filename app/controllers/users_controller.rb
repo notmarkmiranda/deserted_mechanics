@@ -74,6 +74,6 @@ class UsersController < ApplicationController
 
   def request_path
     return "membership_invite" if request.original_fullpath.starts_with?("/invite/")
-    return "reset" if request.original_fullpath.starts_with?("/reset/")
+    "reset" if request.original_fullpath.starts_with?("/reset/")
   end
 end
