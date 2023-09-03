@@ -1,5 +1,5 @@
 class LeagueCreator
-  attr_reader :league, :membership
+  attr_reader :league, :membership, :errors
 
   def initialize(params, user)
     @params = params
@@ -11,14 +11,14 @@ class LeagueCreator
 
   def save
     @league = create_league
-    @membership = create_membership
+    @membership = create_membership if errors.empty?
     return true if errors.empty?
     false
   end
 
   private
 
-  attr_reader :params, :user, :errors
+  attr_reader :params, :user
 
   def create_league
     league = League.new(params)
