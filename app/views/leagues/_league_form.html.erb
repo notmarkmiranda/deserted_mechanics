@@ -8,8 +8,10 @@
     <%= f.text_field :location %>
   </div>
   <div>
-    <%= f.label :private_league %>
-    <%= f.check_box :private_league %>
+    <%= f.label :private_league do %>
+      <%= f.check_box :private_league %>
+      Private League
+    <% end %>
   </div>
   <%= f.submit "Save League" %>
 <% end %>
