@@ -1,16 +1,12 @@
 <div class="row">
   <% if policy(@league).edit? %>
-    <div class="six columns">
-      <h2>League controls</h2>
-      <%= link_to "Edit League", edit_league_path %>
-      <%= button_to "Delete League", league_path(@league), method: :delete%>
-      <%= link_to "Invite new player", new_league_membership_path(@league) %>
+    <div class="twelve columns league-buttons">
+      <%= link_to "Edit League", edit_league_path, class: "button button-primary league-button" %>
+      <%= link_to "Invite new player", new_league_membership_path(@league), class: "button button-primary league-button" %>
+      <%= button_to "Delete League", league_path(@league), method: :delete, class: "league-button" %>
+      <%= link_to "Schedule Game", new_league_game_path(@league), class: "button button-primary" %>
     </div>
 
-    <div class="six columns">
-      <h2>Game controls</h2>
-      <%= link_to "Schedule Game", new_league_game_path(@league) %>
-    </div>
   <% end %>
 </div>
 <h1><%= @league.name %></h1>

@@ -1,8 +1,8 @@
 <% if current_user %>
   <% unless current_page?(dashboard_path) %>
-    <%= link_to "Dashboard", dashboard_path %>
+    <%= link_to "Dashboard", dashboard_path, class: "button button-primary" %>
   <% end %>
-  <%= button_to "Sign Out", sign_out_path %>
+  <%= button_to "Sign Out", sign_out_path, class: "button" %>
 <% else %>
   <% unless current_page?(sign_in_path) %>
     <%= link_to "Sign In", sign_in_path %>
@@ -11,5 +11,3 @@
     <%= link_to "Sign Up", sign_up_path %>
   <% end %>
 <% end %>
-
-<hr />

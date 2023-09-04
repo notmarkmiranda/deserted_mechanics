@@ -15,3 +15,10 @@
  *= require normalize
  *= require skeleton
  */
+
+.league-buttons {
+  display: flex;
+  .league-button {
+    margin: 0px 5px;
+  }
+}
