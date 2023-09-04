@@ -3,4 +3,6 @@ class Season < ApplicationRecord
 
   belongs_to :league
   has_many :games
+
+  delegate :count, to: :games, prefix: true
 end

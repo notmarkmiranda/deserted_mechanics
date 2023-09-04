@@ -1,28 +1,54 @@
-<div>
+<div class="row">
   <% if policy(@league).edit? %>
-    <h2>League controls</h2>
-    <div>
+    <div class="six columns">
+      <h2>League controls</h2>
       <%= link_to "Edit League", edit_league_path %>
       <%= button_to "Delete League", league_path(@league), method: :delete%>
       <%= link_to "Invite new player", new_league_membership_path(@league) %>
     </div>
 
-    <h2>Game controls</h2>
-    <div>
+    <div class="six columns">
+      <h2>Game controls</h2>
       <%= link_to "Schedule Game", new_league_game_path(@league) %>
     </div>
   <% end %>
 </div>
 <h1><%= @league.name %></h1>
 <div>Location: <%= @league.location %></div>
-<div>Seasons count: <%= @league.seasons_count %></div>
+<hr>
+<div class="row">
+  <div class="season-games six columns">
+    <h2>Season Games</h2>
+    <% @league.season_games.each do |game| %>
+      <li><%= link_to game.date, game %></li>
+    <% end %>
+  </div>
+  <div class="seasons-list six columns">
+    <h3>Seasons: <%= @league.seasons_count %></h3>
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Winner / Current Leader</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th># of Games</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @league.seasons.decorate.each.with_index(1) do |season, index| %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= season.winner %></td>
+          <td><%= season.start_date %></td>
+          <td><%= season.end_date %></td>
+          <td><%= season.games_count %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div>
   <%= link_to "Members: #{@league.memberships_count}", league_memberships_path(@league) %>
-</div>
-
-<div>
-  <h2>Season Games</h2>
-  <% @league.season_games.each do |game| %>
-    <li><%= link_to game.date, game %></li>
-  <% end %>
 </div>
