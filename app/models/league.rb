@@ -39,6 +39,10 @@ class League < ApplicationRecord
   end
 
   def next_game
-    season_games.or(games).where(completed: false).order(date: :asc).limit(1).first
+    season_games.or(games)
+      .where(completed: false, date: DateTime.now..)
+      .order(date: :asc)
+      .limit(1)
+      .first
   end
 end

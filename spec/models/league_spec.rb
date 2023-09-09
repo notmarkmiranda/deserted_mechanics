@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe League, type: :model do
+  include ActiveSupport::Testing::TimeHelpers
   it { should have_many :memberships }
   it { should have_many(:users).through(:memberships) }
   it { should have_many :seasons }
@@ -19,6 +20,12 @@ RSpec.describe League, type: :model do
 
       it "returns the next game" do
         expect(league.next_game).to eq(@season_game)  
+      end
+
+      it "does returns nil when the game is in the past" do
+        travel_to 4.days.from_now do
+          expect(league.next_game).to be_nil
+        end
       end
     end
 
