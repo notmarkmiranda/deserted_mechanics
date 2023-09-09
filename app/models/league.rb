@@ -37,4 +37,12 @@ class League < ApplicationRecord
   def create_active_season
     seasons.create(active: true)
   end
+
+  def next_game
+    season_games.or(games)
+      .where(completed: false, date: DateTime.now..)
+      .order(date: :asc)
+      .limit(1)
+      .first
+  end
 end

@@ -10,7 +10,12 @@
   <% end %>
 </div>
 <h1><%= @league.name %></h1>
-<div>Location: <%= @league.location %></div>
+<hr>
+<div>
+  <p>Random bits of info about the league</p>
+  <div>Location: <%= @league.location %></div>
+  <div>Next scheduled game: <%= @league.next_scheduled_game %></div>
+</div>
 <hr>
 <div class="row">
   <div class="season-games six columns">
