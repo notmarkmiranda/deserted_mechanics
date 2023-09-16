@@ -23,6 +23,10 @@
     <% @league.season_games.each do |game| %>
       <li><%= link_to game.date, game %></li>
     <% end %>
+    <h2>Non-season Games</h2>
+    <% @league.games.each do |game| %>
+      <li><%= link_to game.date, game %></li>
+    <% end %>
   </div>
   <div class="seasons-list six columns">
     <h3>Seasons: <%= @league.seasons_count %></h3>
