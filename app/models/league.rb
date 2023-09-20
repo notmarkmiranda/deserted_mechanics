@@ -31,7 +31,7 @@ class League < ApplicationRecord
   after_commit :create_active_season
 
   def active_season
-    seasons.find_by(active: true)
+    seasons.find_by(active: true) || create_active_season
   end
 
   def create_active_season

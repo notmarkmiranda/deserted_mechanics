@@ -19,7 +19,7 @@ RSpec.describe League, type: :model do
       end
 
       it "returns the next game" do
-        expect(league.next_game).to eq(@season_game)  
+        expect(league.next_game).to eq(@season_game)
       end
 
       it "does returns nil when the game is in the past" do

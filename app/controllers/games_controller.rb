@@ -12,12 +12,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = if params[:active_season] == "1"
-      season = @league.active_season || @league.create_active_season
-      season.games.new(game_params)
-    else
-      @league.games.new(game_params)
-    end
+    @game = initialize_game
     authorize @game
     if @game.save
       flash[:notice] = "Game scheduled"
@@ -30,11 +25,24 @@ class GamesController < ApplicationController
 
   private
 
+  def initialize_game
+    if active_season?
+      season = @league.active_season
+      season.games.new(game_params)
+    else
+      @league.games.new(game_params)
+    end
+  end
+
   def game_params
     params.require(:game).permit(:date, :completed, :buy_in, :location, :estimated_player_count, :payout_schedule)
   end
 
   def load_league
     @league = League.find(params[:league_id])
+  end
+
+  def active_season?
+    params[:active_season] && params[:active_season] == "1"
   end
 end
