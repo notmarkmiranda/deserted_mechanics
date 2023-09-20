@@ -4,7 +4,7 @@ class SeasonDecorator < ApplicationDecorator
   def winner
     "Mark Miranda"
   end
-  
+
   def start_date
     "January 5, 2023"
   end
